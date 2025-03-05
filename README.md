@@ -5,7 +5,6 @@
 [![GitHub Issues](https://img.shields.io/github/issues/greggh/nvim-toolkit?style=flat-square)](https://github.com/greggh/nvim-toolkit/issues)
 [![GitHub Last Commit](https://img.shields.io/github/last-commit/greggh/nvim-toolkit?style=flat-square)](https://github.com/greggh/nvim-toolkit/commits/main)
 [![CI](https://img.shields.io/github/actions/workflow/status/greggh/nvim-toolkit/ci.yml?branch=main&style=flat-square&logo=github)](https://github.com/greggh/nvim-toolkit/actions/workflows/ci.yml)
-Version: v0.1.0
 [![Version](https://img.shields.io/badge/Version-0.1.0-blue?style=flat-square)](https://github.com/greggh/nvim-toolkit/releases/tag/v0.1.0)
 [![Discussions](https://img.shields.io/github/discussions/greggh/nvim-toolkit?style=flat-square&logo=github)](https://github.com/greggh/nvim-toolkit/discussions)
 
