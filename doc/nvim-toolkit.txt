@@ -1,0 +1,326 @@
+*nvim-toolkit.txt*  Shared runtime utilities library for Neovim plugins and configurations
+
+================================================================================
+CONTENTS                                                    *nvim-toolkit-contents*
+
+1. Introduction ................ |nvim-toolkit-introduction|
+2. Requirements ................ |nvim-toolkit-requirements|
+3. Installation ................ |nvim-toolkit-installation|
+4. Configuration ............... |nvim-toolkit-configuration|
+5. Modules ..................... |nvim-toolkit-modules|
+6. API Functions ............... |nvim-toolkit-api|
+7. Troubleshooting ............. |nvim-toolkit-troubleshooting|
+8. Contributing ................ |nvim-toolkit-contributing|
+9. License ..................... |nvim-toolkit-license|
+
+================================================================================
+1. Introduction                                      *nvim-toolkit-introduction*
+
+Nvim-toolkit is a shared runtime utilities library for Neovim plugins and 
+configurations. It provides commonly needed functionality like logging, UI 
+components, filesystem operations, API wrappers, and configuration management.
+
+Key features:
+- UI Components – Floating windows, status line helpers, notifications
+- Logging System – Multiple log levels, file rotation, configurable formats
+- Filesystem Utilities – Path handling, file operations, project root detection
+- Neovim API Wrappers – Simplified autocmd creation, buffer/window management
+- Configuration Utilities – Settings management, validation, defaults
+
+================================================================================
+2. Requirements                                      *nvim-toolkit-requirements*
+
+- Neovim >= 0.8.0
+
+================================================================================
+3. Installation                                      *nvim-toolkit-installation*
+
+Installing the library for use:
+
+Using packer.nvim:
+>lua
+  use {'greggh/nvim-toolkit'}
+<
+
+Using lazy.nvim:
+>lua
+  {
+    'greggh/nvim-toolkit',
+    lazy = true
+  }
+<
+
+As a git submodule (for plugin developers):
+>bash
+  git submodule add https://github.com/greggh/nvim-toolkit external/nvim-toolkit
+<
+
+Then in your plugin code:
+>lua
+  -- Add the submodule to package.path
+  local path_sep = vim.loop.os_uname().sysname:match("Windows") and "\\" or "/"
+  vim.opt.runtimepath:append(vim.fn.fnamemodify("external/nvim-toolkit", ":p"))
+
+  -- Now you can require it
+  local toolkit = require('nvim_toolkit')
+<
+
+================================================================================
+4. Configuration                                     *nvim-toolkit-configuration*
+
+Initialize the toolkit with default or custom options:
+>lua
+  local toolkit = require('nvim_toolkit')
+
+  -- Initialize with default options
+  toolkit.setup()
+
+  -- Or with custom options
+  toolkit.setup({
+    log = {
+      level = "debug",
+      file = vim.fn.stdpath("cache") .. "/logs/myapp.log"
+    },
+    ui = {
+      float = {
+        border = "single"
+      }
+    }
+  })
+<
+
+Configuration options:
+
+log.level~
+  Type: `string`
+  Default: `"info"`
+  Log level: "debug", "info", "warn", "error", or "off"
+
+log.file~
+  Type: `string`
+  Default: `nil`
+  Path to log file, or nil to disable file logging
+
+log.max_size~
+  Type: `number`
+  Default: `1048576`
+  Maximum log file size in bytes before rotation (1MB)
+
+log.use_console~
+  Type: `boolean`
+  Default: `true`
+  Whether to output logs to the Neovim console
+
+ui.float.border~
+  Type: `string`
+  Default: `"rounded"`
+  Border style for floating windows
+
+ui.float.width~
+  Type: `number`
+  Default: `80`
+  Default width for floating windows
+
+ui.float.height~
+  Type: `number`
+  Default: `20`
+  Default height for floating windows
+
+fs.cache_enabled~
+  Type: `boolean`
+  Default: `true`
+  Whether to cache filesystem operations
+
+fs.cache_timeout~
+  Type: `number`
+  Default: `30`
+  Timeout in seconds for filesystem cache
+
+api.safe_mode~
+  Type: `boolean`
+  Default: `true`
+  Whether to catch and handle errors in API calls
+
+================================================================================
+5. Modules                                               *nvim-toolkit-modules*
+
+nvim-toolkit includes the following modules:
+
+UI Module:
+>lua
+  local ui = require('nvim_toolkit.ui')
+<
+- Floating windows management with ui.float
+- Notification system with ui.notify
+
+Log Module:
+>lua
+  local log = require('nvim_toolkit.log')
+<
+- Multiple log levels: log.debug, log.info, log.warn, log.error
+- File logging with rotation
+- In-memory logs for testing with log.get_memory_log()
+
+Filesystem Module:
+>lua
+  local fs = require('nvim_toolkit.fs')
+<
+- Project root detection with fs.find_root()
+- File operations: fs.file_exists(), fs.read_file(), fs.write_file()
+- Directory scanning with fs.scan_dir()
+
+API Module:
+>lua
+  local api = require('nvim_toolkit.api')
+<
+- Autocommand utilities: api.create_autocmd(), api.create_augroup()
+- Safe API wrappers with error handling
+
+Config Module:
+>lua
+  local config = require('nvim_toolkit.config')
+<
+- Configuration validation with config.validate()
+- Schema-based validation for user configurations
+
+================================================================================
+6. API Functions                                              *nvim-toolkit-api*
+
+UI Module:
+
+*nvim_toolkit.ui.float.open(opts)*
+  Create and open a floating window.
+  
+  Parameters:
+    {opts} (table) Window options and content.
+  
+  Returns:
+    (number, number) Window ID and Buffer ID.
+  
+  Example:
+>lua
+  local win_id, buf_id = require('nvim_toolkit.ui').float.open({
+    title = "My Window",
+    content = {"Line 1", "Line 2"},
+    width = 60,
+    height = 10
+  })
+<
+
+*nvim_toolkit.ui.notify(message, level, opts)*
+  Display a notification message.
+  
+  Parameters:
+    {message} (string) The message to display.
+    {level} (string) The notification level (info, warn, error).
+    {opts} (table) Additional options like timeout.
+  
+  Example:
+>lua
+  require('nvim_toolkit.ui').notify("Operation completed", "info", {
+    timeout = 5000  -- milliseconds
+  })
+<
+
+Log Module:
+
+*nvim_toolkit.log.debug(message, metadata)*
+*nvim_toolkit.log.info(message, metadata)*
+*nvim_toolkit.log.warn(message, metadata)*
+*nvim_toolkit.log.error(message, metadata)*
+  Log a message at the specified level.
+  
+  Parameters:
+    {message} (string) The message to log.
+    {metadata} (table) Optional contextual data.
+  
+  Example:
+>lua
+  local log = require('nvim_toolkit.log')
+  log.info("User action", { user = "username", action = "save" })
+<
+
+Filesystem Module:
+
+*nvim_toolkit.fs.find_root(start_path, markers)*
+  Find project root from the given path.
+  
+  Parameters:
+    {start_path} (string, optional) Path to start searching from.
+    {markers} (table, optional) Root markers to look for.
+  
+  Returns:
+    (string) Root path if found, nil otherwise.
+  
+  Example:
+>lua
+  local root = require('nvim_toolkit.fs').find_root()
+<
+
+API Module:
+
+*nvim_toolkit.api.create_autocmd(event, opts)*
+  Create an autocommand with error handling.
+  
+  Parameters:
+    {event} (string|table) Event name or list of events.
+    {opts} (table) Options for the autocommand.
+  
+  Returns:
+    (number) Autocmd ID.
+  
+  Example:
+>lua
+  require('nvim_toolkit.api').create_autocmd("BufWritePost", {
+    pattern = "*.lua",
+    callback = function() print("Lua file saved") end
+  })
+<
+
+Config Module:
+
+*nvim_toolkit.config.validate(config, schema)*
+  Validate a configuration against a schema.
+  
+  Parameters:
+    {config} (table) User configuration to validate.
+    {schema} (table) Schema definition for validation.
+  
+  Returns:
+    (table) Validated and normalized configuration.
+  
+  Example:
+>lua
+  local validated = require('nvim_toolkit.config').validate(user_config, {
+    log_level = { type = "string", optional = true },
+    timeout = { type = "number", default = 5000 }
+  })
+<
+
+================================================================================
+7. Troubleshooting                                  *nvim-toolkit-troubleshooting*
+
+Common issues:
+
+Issue: Runtime path not configured correctly for git submodule.
+Solution: Ensure you've properly added the submodule path to runtimepath.
+
+Issue: Type errors or undefined functions.
+Solution: Make sure you're using the latest version and check API documentation.
+
+For more help, create an issue on GitHub:
+https://github.com/greggh/nvim-toolkit/issues
+
+================================================================================
+8. Contributing                                       *nvim-toolkit-contributing*
+
+Contributions are welcome! Check our GitHub repository for more information:
+https://github.com/greggh/nvim-toolkit
+
+================================================================================
+9. License                                               *nvim-toolkit-license*
+
+MIT License
+Copyright (c) 2025 Gregg H
+
+ vim:tw=78:ts=8:ft=help:norl:
