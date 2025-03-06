@@ -1,13 +1,4 @@
 # These are supported funding model platforms
 
-github: # Replace with up to 4 GitHub Sponsors-enabled gregghs e.g., [user1, user2]
-patreon: # Replace with a single Patreon greggh
-open_collective: # Replace with a single Open Collective greggh
-ko_fi: # Replace with a single Ko-fi greggh
-tidelift: # Replace with a single Tidelift platform-name/package-name e.g., npm/babel
-community_bridge: # Replace with a single Community Bridge project-name e.g., cloud-foundry
-liberapay: # Replace with a single Liberapay greggh
-issuehunt: # Replace with a single IssueHunt greggh
-otechie: # Replace with a single Otechie greggh
-lfx_crowdfunding: # Replace with a single LFX Crowdfunding project-name e.g., cloud-foundry
-custom: # Replace with up to 4 custom sponsorship URLs e.g., ['link1', 'link2']
+github: [greggh]
+ko_fi: gregghoush
