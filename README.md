@@ -1,3 +1,5 @@
+<div align="center">
+
 # Nvim-Toolkit
 
 [![GitHub License](https://img.shields.io/github/license/greggh/nvim-toolkit?style=flat-square)](https://github.com/greggh/nvim-toolkit/blob/main/LICENSE)
@@ -7,6 +9,7 @@
 [![CI](https://img.shields.io/github/actions/workflow/status/greggh/nvim-toolkit/ci.yml?branch=main&style=flat-square&logo=github)](https://github.com/greggh/nvim-toolkit/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/badge/Version-0.1.0-blue?style=flat-square)](https://github.com/greggh/nvim-toolkit/releases/tag/v0.1.0)
 [![Discussions](https://img.shields.io/github/discussions/greggh/nvim-toolkit?style=flat-square&logo=github)](https://github.com/greggh/nvim-toolkit/discussions)
+[![Neovim](https://img.shields.io/badge/Neovim-0.8.0+-blueviolet.svg?style=flat-square&logo=neovim)](https://neovim.io)
 
 *Shared runtime utilities library for Neovim plugins and configurations. Provides commonly needed functionality like logging, UI components, filesystem operations, API wrappers, and configuration management for Neovim plugin development.*
 
@@ -14,17 +17,21 @@
 [Installation](#installation) •
 [Usage](#usage) •
 [API Documentation](#api-documentation) •
+[Requirements](#requirements) •
 [Contributing](#contributing) •
-[License](#license)
+[License](#license) •
+[Discussions](https://github.com/greggh/nvim-toolkit/discussions)
+
+</div>
 
 ## Features
 
-- **UI Components** – Floating windows, status line helpers, notifications, input forms
-- **Logging System** – Multiple log levels, file rotation, configurable formats
-- **Filesystem Utilities** – Path handling, file operations, project root detection
-- **Neovim API Wrappers** – Simplified autocmd creation, buffer/window management
-- **Configuration Utilities** – Settings management, validation, defaults with overrides
-- **Keymap Management** – Fluent API for keymappings, which-key integration, terminal-mode handling
+- 🪟 **UI Components** - Floating windows, status line helpers, notifications, input forms
+- 📝 **Logging System** - Multiple log levels, file rotation, configurable formats
+- 📂 **Filesystem Utilities** - Path handling, file operations, project root detection
+- 🔌 **API Wrappers** - Simplified autocmd creation, buffer/window management
+- ⚙️ **Configuration** - Settings management, validation, defaults with overrides
+- ⌨️ **Keymap Management** - Fluent API for keymappings, which-key integration, terminal-mode handling
 
 ## Installation
 
@@ -234,3 +241,9 @@ This project is available under the MIT License. See the [LICENSE](LICENSE) file
 - [Neovim](https://neovim.io/) - The extensible Vim-based text editor
 - [Semantic Versioning](https://semver.org/) - Versioning guidelines
 - [Keep a Changelog](https://keepachangelog.com/) - Guidelines for maintaining a changelog
+
+---
+
+<div align="center">
+  <p>Made with ❤️ by <a href="https://github.com/greggh">greggh</a></p>
+</div>
