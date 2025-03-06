@@ -1,58 +1,33 @@
-# Nvim-Toolkit Shared Utilities Library
+# Project: nvim-toolkit
 
-## Planned Structure
+## Overview
+Nvim-Toolkit is a shared runtime utilities library for Neovim plugins and configurations. It provides a comprehensive set of modules for common Neovim plugin development needs including UI components, logging, filesystem operations, API wrappers, configuration validation, and keymap management.
 
-```
-nvim-toolkit/
-├── lua/
-│   └── nvim-toolkit/
-│       ├── ui/        # UI components and helpers
-│       ├── log/       # Logging utilities
-│       ├── fs/        # Filesystem utilities
-│       ├── api/       # Neovim API wrappers
-│       └── config/    # Configuration utilities
-```
+## Essential Commands
+- Run Tests: `env -C /home/gregg/Projects/neovim/nvim-toolkit lua tests/run_tests.lua`
+- Check Formatting: `env -C /home/gregg/Projects/neovim/nvim-toolkit stylua lua/ -c`
+- Format Code: `env -C /home/gregg/Projects/neovim/nvim-toolkit stylua lua/`
+- Run Linter: `env -C /home/gregg/Projects/neovim/nvim-toolkit luacheck lua/`
+- Build Documentation: `env -C /home/gregg/Projects/neovim/nvim-toolkit mkdocs build`
 
-## Planned Features
+## Project Structure
+- `/lua/nvim-toolkit`: Main module directory
+- `/lua/nvim-toolkit/ui`: UI components and windows
+- `/lua/nvim-toolkit/log`: Logging system
+- `/lua/nvim-toolkit/fs`: Filesystem utilities
+- `/lua/nvim-toolkit/api`: Neovim API wrappers
+- `/lua/nvim-toolkit/config`: Configuration validation
+- `/lua/nvim-toolkit/keymap`: Keymap management
+- `/examples`: Example scripts demonstrating usage
+- `/tests`: Test files for each module
 
-### UI Components
-- Floating window management
-- Status line components
-- Buffer line components
-- Notification system
-- Input prompts and forms
+## Current Focus
+- Integrating nvim-toolkit into Laravel Helper and Claude Code plugins
+- Expanding module functionality based on real-world usage
+- Enhancing documentation with more detailed examples
+- Implementing test coverage for all modules
 
-### Logging System
-- Multiple log levels (debug, info, warn, error)
-- Log file rotation
-- Configurable log formats
-- In-memory logging for testing
-
-### Filesystem Utilities
-- Path handling with platform compatibility
-- File reading/writing with error handling
-- Directory scanning and filtering
-- Project root detection
-
-### Neovim API Wrappers
-- Simplified autocmd creation
-- Buffer and window management
-- Safely call Neovim APIs with error handling
-- Event handling and callback management
-
-### Configuration Utilities
-- Simplified settings management
-- User configuration validation
-- Default settings with overrides
-- Configuration file handling
-
-## Git Commands
-- `git -C /home/gregg/Projects/neovim/nvim-toolkit add .` - Stage all changes
-- `git -C /home/gregg/Projects/neovim/nvim-toolkit commit -m "message"` - Commit changes
-- `git -C /home/gregg/Projects/neovim/nvim-toolkit push` - Push changes
-
-## Integration Strategy
-- Add as git submodule to template repositories
-- Include as dependency in plugin specifications
-- Use in both plugin and configuration projects
-- Keep backward compatible with Neovim 0.8+
+## Documentation Links
+- Tasks: `/home/gregg/Projects/docs-projects/neovim-ecosystem-docs/tasks/nvim-toolkit-tasks.md`
+- Project Status: `/home/gregg/Projects/docs-projects/neovim-ecosystem-docs/project-status.md`
+- Architecture: `/home/gregg/Projects/docs-projects/neovim-ecosystem-docs/specs/nvim-toolkit-architecture.md`
